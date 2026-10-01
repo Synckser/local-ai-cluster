@@ -2,6 +2,7 @@
 # Run in PowerShell:  irm https://raw.githubusercontent.com/Synckser/local-ai-cluster/main/install-lenovo.ps1 | iex
 
 $ErrorActionPreference = "Stop"
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $Tag  = "b11322"   # must match the build on the Macs
 $Dir  = "C:\llama"
 $Base = "https://github.com/ggml-org/llama.cpp/releases/download/$Tag"
