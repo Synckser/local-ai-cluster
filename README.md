@@ -31,3 +31,12 @@ curl -fsSL https://raw.githubusercontent.com/Synckser/local-ai-cluster/main/inst
 Model: `Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf` (unsloth, ~17 GB) in `~/models/`.
 
 **Security:** rpc-server has no auth. LAN only — never port-forward 50052.
+
+## Measured (all 3 nodes, Qwen3-Coder-30B Q4_K_M, 1GbE)
+- Generation: ~22 tok/s
+- Prompt read: ~260 tok/s → first Claude Code turn ~70 s (17k-token system prompt), later turns faster via cache
+- Reload with helper cache (`-c`): ~30 s
+
+## Gotchas
+- Main Mac must use `--load-mode none`; default mmap maps the whole model into Metal and OOMs a 16 GB Mac.
+- Lenovo helper auto-starts at login via scheduled task `llama-rpc`.
